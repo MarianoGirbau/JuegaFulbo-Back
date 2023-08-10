@@ -22,12 +22,12 @@ const initApp = async () => {
 
 initApp();
 
-// app.use("/api", require("./routes/Rutas.Canchas"));
-// app.use("/api/user", require("./routes/Rutas.Usuarios"));
-// app.use("/protegida", comprabacionJwt, require("./routes/RutaAdmin"));
+// app.use("/api", require("./routes/Rutas-canchas"));
+// app.use("/api/user", require("./routes/Rutas-usuarios"));
+// app.use("/protegida", comprabacionJwt, require("./routes/Rutas-admin"));
 
 // crear una ruta em express
 
-// app.use("/api", require("./routes/Rutas.Canchas"));
-// app.use("/api/user", require("./routes/Rutas.Usuarios"));
-// app.use("/protegida", comprabacionJwt, require("./routes/RutaAdmin"));
+// app.use("/api", require("./routes/Rutas-canchas"));
+// app.use("/api/user", require("./routes/Rutas-usuarios"));
+// app.use("/protegida", comprabacionJwt, require("./routes/Rutas-admin"));

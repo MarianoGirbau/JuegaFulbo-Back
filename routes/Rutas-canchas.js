@@ -1,0 +1,22 @@
+const express = require("express");
+const router = express.Router();
+const canchasController = require("../controllers/canchascontrollers");
+
+// Rutas del GET
+
+router.get("/canchas", canchasController.obtenerCanchas);
+router.get("/canchas/:id", canchasController.obtenerCanchasPorId);
+
+// Rutas de Post
+
+router.post("/canchas", canchasController.addCancha);
+
+// Rutas de put
+router.put("/canchas/:id", canchasController.updateCancha);
+
+// Rutas del delete
+router.delete("/canchas/:id", canchasController.deleteCancha);
+
+// // rutas get
+
+module.exports = router;
