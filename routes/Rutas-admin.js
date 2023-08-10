@@ -1,5 +1,5 @@
 const express = require("express");
-const { route } = require("./Rutas.Canchas");
+const { route } = require("./Rutas-canchas");
 const router = express.Router();
 
 router.get("/admin", (req, res) => {

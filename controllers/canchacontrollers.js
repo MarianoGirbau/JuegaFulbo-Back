@@ -1,70 +1,88 @@
-const Usuarios = require("../models/usuarios.models");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const CanchaModel = require("../models/canchas.models");
+const Cancha = require("../models/canchas.models");
 
-const register = async (req, res) => {
+// Get
+
+const obtenerCanchas = async (req, res) => {
   try {
-    const { nombre, apellido, email, password, rol } = req.body;
-    const hash = await bcrypt.hash(password, 10);
-
-    const usuario = new Usuarios({
-      nombre,
-      apellido,
-      email,
-      password: hash,
-      rol,
-    });
-    await usuario.save();
-    res.status(201).json(usuario);
+    const canchas = await Cancha.find();
+    res.json(canchas);
   } catch (error) {
-    console.error(error);
-    res.status(400).json({ message: "Error al crear el usuario", error });
+    res.status(400).json("Canchas no encontradas");
   }
 };
 
-const loginUsuario = async (req, res) => {
-  const user = await Usuarios.findOne({ email: req.body.email });
-
-  if (!user) {
-    return res.status(400).json({ message: "Usuario y/o Password incorrecto" });
+const obtenerCanchasPorId = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const cancha = await CanchaModel.findById(id);
+    if (cancha) {
+      res.json(cancha);
+    } else {
+      res.status(404).json("Cancha no encontrada");
+    }
+  } catch (error) {
+    res.status(400).json("Cancha no encontrada");
+    res.status(500).json("Error en el servidor");
   }
-
-  const match = await bcrypt.compare(req.body.password, user.password);
-
-  if (!match) {
-    return res.status(400).json({ message: "Usuario y/o Password incorrecto" });
-  }
-
-  // generar el token
-
-  const token = jwt.sign(
-    {
-      id: user._id,
-      nombre: user.nombre,
-      apellido: user.apellido,
-      rol: user.rol,
-    },
-    process.env.SECRET_KEY,
-    { expiresIn: "1h" }
-  );
-
-  res.header("auth-token", token).json({
-    error: null,
-    data: { token },
-  });
 };
 
-const getAllUser = async (req, res) => {
+// creacion de una cancha
+
+const addCancha = async (req, res) => {
   try {
-    const usuarios = await Usuarios.find();
-    res.json(usuarios);
+    const cancha = new CanchaModel(req.body);
+    await cancha.save();
+    res.status(201).json(cancha);
   } catch (error) {
-    res.status(400).json("Usuarios no encontrados");
+    res.status(400).json("Cancha no creada");
+  }
+};
+
+// Actualizar una cancha
+
+const updateCancha = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const cancha = await CanchaModel.findById(id);
+    if (cancha) {
+      cancha.nombre = req.body.nombre;
+      cancha.capacidad = req.body.capacidad;
+      cancha.direccion = req.body.direccion;
+      cancha.lugar = req.body.lugar;
+      cancha.telefono = req.body.telefono;
+      const canchaActualizada = await cancha.save();
+      res.status(200).json("Cancha actualizada");
+      res.status(canchaActualizada);
+    } else {
+      res.status(400).json("Cancha no encontrada ");
+    }
+  } catch (error) {
+    res.status(404).json("cancha no encontrada");
+  }
+};
+
+// Borrar una cancha
+
+const deleteCancha = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const cancha = await CanchaModel.findById(id);
+    if (cancha) {
+      await CanchaModel.deleteOne({ _id: id });
+      res.status(200).json("Cancha eliminada");
+    } else {
+      res.status(404).json("Cancha no encontrada");
+    }
+  } catch (error) {
+    res.status(400).json("Cancha no eliminada");
   }
 };
 
 module.exports = {
-  register,
-  loginUsuario,
-  getAllUser,
+  obtenerCanchas,
+  obtenerCanchasPorId,
+  addCancha,
+  updateCancha,
+  deleteCancha,
 };

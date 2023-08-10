@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const canchasController = require("../controllers/canchascontrollers");
+const canchasController = require("../controllers/canchacontrollers");
 
 // Rutas del GET
 
