@@ -4,10 +4,13 @@ const mongoose = require("mongoose");
 
 const connectDb = async () => {
   try {
-    await mongoose.connect("mongodb://0.0.0.0:27017/juegafulbo", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(
+      "mongodb+srv://france:n7v9lvTA6CfVJvnw@messi.aoslkk9.mongodb.net/?retryWrites=true&w=majority",
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }
+    );
     console.log("Conectado a la base de datos");
   } catch (error) {
     console.log("Error al conectar", error);
