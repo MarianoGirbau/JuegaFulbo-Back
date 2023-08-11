@@ -5,8 +5,7 @@ const canchasSchema = new Schema(
   {
     nombre: String, // {type: String, requerid: true}
     capacidad: Number,
-    direccion: String,
-    lugar: String,
+    precio: Number,
     telefono: Number,
   },
   { versionKey: false }
