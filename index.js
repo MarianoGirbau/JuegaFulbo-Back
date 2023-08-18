@@ -3,6 +3,14 @@ const app = express(); // inicializar express
 const connectDb = require("./db/mongodb");
 const comprabacionJwt = require("./middleware/comprobacionjwt");
 const cors = require("cors");
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use(express.json()); // permite recibir obj en forma de json
 app.use(express.urlencoded({ extended: true })); // permite recibir parametros y queris en la rutas
@@ -23,18 +31,12 @@ const initApp = async () => {
 initApp();
 
 app.get("/test", (req, res) => {
-  res.json("hola");
+  res.json("hodfsdla");
 });
 
 app.use("/api", require("./routes/Rutas-canchas"));
 app.use("/api/user", require("./routes/Rutas-usuarios"));
 app.use("/protegida", comprabacionJwt, require("./routes/Rutas-admin"));
-app.use(
-  cors({
-    credentials: true,
-    origin: "http://localhost:27017/",
-  })
-)
 
 // crear una ruta em express
 

@@ -23,6 +23,8 @@ const register = async (req, res) => {
 };
 
 const loginUsuario = async (req, res) => {
+  console.log("loginUsuario");
+
   const user = await Usuarios.findOne({ email: req.body.email });
 
   if (!user) {
