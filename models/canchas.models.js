@@ -7,6 +7,11 @@ const canchasSchema = new Schema(
     capacidad: Number,
     precio: Number,
     telefono: Number,
+    // reservas: [
+    //   {
+
+    //   }
+    // ]
   },
   { versionKey: false }
 );

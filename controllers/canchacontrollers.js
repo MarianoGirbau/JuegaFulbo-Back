@@ -1,7 +1,7 @@
 const CanchaModel = require("../models/canchas.models");
 const Cancha = require("../models/canchas.models");
 
-// Get
+// Obtener canchas
 
 const obtenerCanchas = async (req, res) => {
   try {
@@ -79,10 +79,38 @@ const deleteCancha = async (req, res) => {
   }
 };
 
+// Reservar una cancha 
+
+// const reservarCancha = async (req, res) => {
+//   try {
+//     const id = req.params.id;
+//     const { usuario } = req.body;
+    
+//     const cancha = await CanchaModel.findById(id);
+
+//     if (cancha) {
+//       cancha.reserva = {
+//         usuario,
+//         fecha: new Date()
+//       };
+
+//       await cancha.save();
+//       res.status(200).json("Cancha reservada");
+//     } else {
+//       res.status(404).json("Cancha no encontrada");
+//     }
+//   } catch (error) {
+//     res.status(400).json("No se pudo realizar la reserva");
+//   }
+// };
+
+
+
 module.exports = {
   obtenerCanchas,
   obtenerCanchasPorId,
   addCancha,
   updateCancha,
   deleteCancha,
+  // reservarCancha
 };
