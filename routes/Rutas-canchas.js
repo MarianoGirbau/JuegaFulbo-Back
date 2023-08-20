@@ -13,6 +13,7 @@ router.post("/canchas", canchasController.addCancha);
 
 // Rutas de put
 router.put("/canchas/:id", canchasController.updateCancha);
+router.put("/canchas/reserva/:id", canchasController.reservarCancha);
 
 // Rutas del delete
 router.delete("/canchas/:id", canchasController.deleteCancha);

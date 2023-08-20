@@ -3,16 +3,20 @@ const { Schema } = mongoose;
 
 const canchasSchema = new Schema(
   {
-    nombre: String, // {type: String, requerid: true}
+    numero: Number, // {type: String, requerid: true}
     capacidad: Number,
     precio: Number,
-    telefono: Number,
     img: String, //imagen de la cancha
-    // reservas: [
-    //   {
-
-    //   }
-    // ]
+    reservas:
+    [
+        [null,null,null,null,null], //Domingo: 19:00, 20:00, 21:00, 22:00, 23:00
+        [null,null,null,null,null], //Lunes
+        [null,null,null,null,null], //Martes
+        [null,null,null,null,null], //Miercoles
+        [null,null,null,null,null], //Jueves
+        [null,null,null,null,null], //Viernes
+        [null,null,null,null,null] //Sabado
+    ]
   },
   { versionKey: false }
 );

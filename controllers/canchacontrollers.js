@@ -46,11 +46,10 @@ const updateCancha = async (req, res) => {
     const id = req.params.id;
     const cancha = await CanchaModel.findById(id);
     if (cancha) {
-      cancha.nombre = req.body.nombre;
+      cancha.numero = req.body.numero;
       cancha.capacidad = req.body.capacidad;
-      cancha.direccion = req.body.direccion;
-      cancha.lugar = req.body.lugar;
-      cancha.telefono = req.body.telefono;
+      cancha.precio = req.body.precio;
+      cancha.img = req.body.img;
       const canchaActualizada = await cancha.save();
       res.status(200).json("Cancha actualizada");
       res.status(canchaActualizada);
@@ -80,6 +79,24 @@ const deleteCancha = async (req, res) => {
 };
 
 // Reservar una cancha 
+
+const reservarCancha = async (req, res) => {
+  try {
+    const idCancha = req.params.id;
+    const { idUsuario, dia, horario } = req.body;
+    const canchaReserva = await CanchaModel.findById(idCancha);
+    if (canchaReserva) {
+      canchaReserva.reservas[dia][horario] = idUsuario;
+      const reserva = await canchaReserva.save();
+      res.status(200).json("Reserva Realizada");
+      res.status(reserva);
+    }else{
+      res.status(404).json("Cancha no encontrada");
+    }
+  } catch (error) {
+    res.status(400).json("Cancha no eliminada");
+  }
+}
 
 // const reservarCancha = async (req, res) => {
 //   try {
@@ -112,5 +129,5 @@ module.exports = {
   addCancha,
   updateCancha,
   deleteCancha,
-  // reservarCancha
+  reservarCancha
 };
