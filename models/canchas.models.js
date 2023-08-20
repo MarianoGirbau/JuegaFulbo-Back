@@ -7,6 +7,7 @@ const canchasSchema = new Schema(
     capacidad: Number,
     precio: Number,
     telefono: Number,
+    img: String, //imagen de la cancha
     // reservas: [
     //   {
 
