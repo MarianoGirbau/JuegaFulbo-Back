@@ -1,6 +1,7 @@
 const Usuarios = require("../models/usuarios.models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const UsuariosModel = require("../models/usuarios.models");
 
 const register = async (req, res) => {
   try {
@@ -65,8 +66,57 @@ const getAllUser = async (req, res) => {
   }
 };
 
+const deleteUsuario = async (req, res) => {
+  console.log("funcion deleteUsuario");
+  try {
+    const id = req.params.id;
+    const usuario = await UsuariosModel.findById(id);
+    // console.log("back", cancha, id);
+    if (usuario) {
+      await UsuariosModel.deleteOne({ _id: id });
+      res.status(200).json("Usuario eliminada");
+    } else {
+      res.status(404).json("Usuario no encontrada");
+    }
+  } catch (error) {
+    res.status(400).json("Usuario no eliminada");
+  }
+};
+
+const updateUsuario = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const usuario = await UsuariosModel.findById(id);
+
+    if (!usuario) {
+      return res.status(400).json("Usuario no encontrado");
+    }
+
+    const { nombre, apellido, email, rol } = req.body;
+    usuario.nombre = nombre;
+    usuario.apellido = apellido;
+    usuario.email = email;
+    usuario.rol = rol;
+
+    try {
+      const usuarioActualizado = await usuario.save();
+      res.status(200).json(usuarioActualizado);
+    } catch (error) {
+      res.status(500).json({
+        error: "Error al actualizar el usuario",
+      });
+    }
+  } catch (error) {
+    res.status(404).json({
+      msg: "Usuario no encontrado",
+    });
+  }
+};
+
 module.exports = {
   register,
   loginUsuario,
   getAllUser,
+  deleteUsuario,
+  updateUsuario,
 };
