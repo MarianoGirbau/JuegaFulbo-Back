@@ -35,11 +35,8 @@ app.get("/test", (req, res) => {
 });
 
 app.use("/api", require("./routes/Rutas-canchas"));
+app.use("/api", require("./routes/Rutas-quinchos"));
 app.use("/api/user", require("./routes/Rutas-usuarios"));
 app.use("/protegida", comprabacionJwt, require("./routes/Rutas-admin"));
 
-// crear una ruta em express
 
-// app.use("/api", require("./routes/Rutas-canchas"));
-// app.use("/api/user", require("./routes/Rutas-usuarios"));
-// app.use("/protegida", comprabacionJwt, require("./routes/Rutas-admin"));
