@@ -82,7 +82,7 @@ const deleteCancha = async (req, res) => {
 
 const reservarCancha = async (req, res) => {
   try {
-    const idCancha = req.params.id;
+    const idCancha = req.params.id; //viene por url
     const { idUsuario, dia, horario } = req.body;
     const canchaReserva = await CanchaModel.findById(idCancha);
     if (canchaReserva) {
