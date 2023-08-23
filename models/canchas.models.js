@@ -9,10 +9,10 @@ const canchasSchema = new Schema(
     img: String, //imagen de la cancha
     reservas:
     [
-        [null,null,null,null,null], // 19:00, 20:00, 21:00, 22:00, 23:00
-        [null,null,null,null,null], 
-        [null,null,null,null,null], 
-        [null,null,null,null,null], 
+        [null,null,null,null,null], // Hoy 19:00, 20:00, 21:00, 22:00, 23:00
+        [null,null,null,null,null], //Mañana
+        [null,null,null,null,null], //Pasado mañana
+        [null,null,null,null,null], //...
         [null,null,null,null,null], 
         [null,null,null,null,null], 
         [null,null,null,null,null]
