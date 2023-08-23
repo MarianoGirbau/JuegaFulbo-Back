@@ -6,6 +6,13 @@ const UsuariosModel = require("../models/usuarios.models");
 const register = async (req, res) => {
   try {
     const { nombre, apellido, email, password, rol } = req.body;
+
+    // Verificar si ya existe un usuario con el mismo correo electrónico
+    const existingUser = await Usuarios.findOne({ email });
+    if (existingUser) {
+      return res.status(409).json("Ya existe un usuario registrado con este correo electrónico.");
+    }
+
     const hash = await bcrypt.hash(password, 10);
 
     const usuario = new Usuarios({
@@ -16,10 +23,9 @@ const register = async (req, res) => {
       rol,
     });
     await usuario.save();
-    res.status(201).json(usuario);
+    res.status(201).json("Usuario creado");
   } catch (error) {
-    console.error(error);
-    res.status(400).json({ message: "Error al crear el usuario", error });
+    res.status(400).json("Usuario no creado");
   }
 };
 
