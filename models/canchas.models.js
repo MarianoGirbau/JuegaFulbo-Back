@@ -9,13 +9,13 @@ const canchasSchema = new Schema(
     img: String, //imagen de la cancha
     reservas:
     [
-        [null,null,null,null,null], //Domingo: 19:00, 20:00, 21:00, 22:00, 23:00
-        [null,null,null,null,null], //Lunes
-        [null,null,null,null,null], //Martes
-        [null,null,null,null,null], //Miercoles
-        [null,null,null,null,null], //Jueves
-        [null,null,null,null,null], //Viernes
-        [null,null,null,null,null] //Sabado
+        [null,null,null,null,null], // 19:00, 20:00, 21:00, 22:00, 23:00
+        [null,null,null,null,null], 
+        [null,null,null,null,null], 
+        [null,null,null,null,null], 
+        [null,null,null,null,null], 
+        [null,null,null,null,null], 
+        [null,null,null,null,null]
     ]
   },
   { versionKey: false }
