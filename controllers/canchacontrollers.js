@@ -98,6 +98,30 @@ const reservarCancha = async (req, res) => {
   }
 }
 
+//Borrar una reserva
+const eliminarReserva = async (req, res) => {
+  try {
+    const idCancha = req.params.id; // Viene por URL
+    const { idUsuario, dia, horario } = req.body;
+    const canchaReserva = await CanchaModel.findById(idCancha);
+
+    if (canchaReserva) {
+      if (canchaReserva.reservas[dia][horario] === idUsuario) {
+        canchaReserva.reservas[dia][horario] = null;
+        await canchaReserva.save();
+        res.status(200).json("Reserva eliminada");
+      } else {
+        res.status(400).json("No se encontró una reserva para el usuario en ese horario");
+      }
+    } else {
+      res.status(404).json("Cancha no encontrada");
+    }
+  } catch (error) {
+    res.status(500).json("Error al eliminar la reserva");
+  }
+};
+
+
 // const reservarCancha = async (req, res) => {
 //   try {
 //     const id = req.params.id;
@@ -129,5 +153,6 @@ module.exports = {
   addCancha,
   updateCancha,
   deleteCancha,
-  reservarCancha
+  reservarCancha,
+  eliminarReserva
 };
