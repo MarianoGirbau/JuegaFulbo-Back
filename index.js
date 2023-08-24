@@ -5,7 +5,7 @@ const comprabacionJwt = require("./middleware/comprobacionjwt");
 const cors = require("cors");
 app.use(
   cors({
-    origin: "https://64e6d202e4b1a238925ca66e--juegafulbo.netlify.app/",
+    origin: "https://64e6d202e4b1a238925ca66e--juegafulbo.netlify.app",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
