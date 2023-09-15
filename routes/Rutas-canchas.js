@@ -19,9 +19,5 @@ router.put("/canchas/reserva/:id", canchasController.reservarCancha);
 router.delete("/canchas/:id", canchasController.deleteCancha);
 router.delete("/canchas/reserva/:id", canchasController.eliminarReserva);
 
-// Ruta reservar canchas
-// router.post("/:id/reservar", canchasController.reservarCancha);
-
-// // rutas get
 
 module.exports = router;
